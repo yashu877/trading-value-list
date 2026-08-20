@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Trading Value List</title><link rel="stylesheet" href="style.css">
-</head><body>
-<header><div class="brand">⚔️ <span>TRADING VALUE LIST</span></div><nav><button data-filter="all">⌂ Home</button><button data-filter="all">☷ All Items</button><button data-filter="chroma">🌈 Chroma Items</button><button data-filter="about">ⓘ About</button></nav><div class="search"><input id="search" placeholder="Search weapon..."></div></header>
-<main><section class="hero"><h1>⚔ Trading Value List</h1><p>Knife VS Gun trading values and demand.</p></section>
-<section class="stats"><div><b id="total">0</b><span>Total Items</span></div><div><b id="chromaCount">0</b><span>Chroma Items</span></div><div><b>Today</b><span>Last Updated</span></div></section>
-<section class="toolbar"><input id="search2" placeholder="Search weapons..."><div class="filters"><button class="active" data-filter="all">All Items</button><button data-filter="knife">Knives</button><button data-filter="gun">Guns</button><button data-filter="chroma">🌈 Chroma Only</button></div></section>
-<section id="grid" class="grid"></section></main><footer>© 2026 Trading Value List. Fan-made and not affiliated with Knife VS Gun.</footer>
-<script src="script.js"></script></body></html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Value List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">TRADING HUB</div>
+      <h1>Value <span>List</span></h1>
+      <p>Check item values and demand before making a trade.</p>
+    </div>
+    <div class="hero-badge">LIVE LIST</div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="Search an item...">
+      </div>
+      <select id="sort">
+        <option value="value-desc">Highest Value</option>
+        <option value="value-asc">Lowest Value</option>
+        <option value="demand-desc">Highest Demand</option>
+        <option value="demand-asc">Lowest Demand</option>
+        <option value="name">Name A-Z</option>
+      </select>
+    </section>
+
+    <section class="stats">
+      <div><b id="itemCount">0</b><small>Items</small></div>
+      <div><b id="totalValue">0</b><small>Total listed value</small></div>
+      <div><b id="avgDemand">0</b><small>Average demand</small></div>
+    </section>
+
+    <div id="items" class="grid"></div>
+    <div id="empty" class="empty hidden">No items found.</div>
+  </main>
+
+  <footer>Trading Value List • Values are based on the supplied list.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
