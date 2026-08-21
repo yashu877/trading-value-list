@@ -37,11 +37,54 @@
       <div><b id="avgDemand">0</b><small>Average demand</small></div>
     </section>
 
+
+    <section class="trade-calculator" id="tradeCalculator">
+      <div class="trade-head">
+        <div>
+          <div class="eyebrow">TRADE TOOL</div>
+          <h2>Trade <span>Calculator</span></h2>
+          <p>Build both offers and instantly see who wins.</p>
+        </div>
+        <button id="resetTrade" class="reset-trade" type="button">RESET</button>
+      </div>
+
+      <div class="trade-sides">
+        <div class="trade-side">
+          <div class="side-title"><span>🟦</span><strong>Your Offer</strong><b id="yourTotal">0</b></div>
+          <div class="trade-search-wrap">
+            <span>⌕</span>
+            <input id="yourSearch" type="search" placeholder="Search an item...">
+          </div>
+          <div id="yourResults" class="trade-results"></div>
+          <div id="yourItems" class="selected-items"></div>
+        </div>
+
+        <div class="trade-vs">VS</div>
+
+        <div class="trade-side">
+          <div class="side-title"><span>🟪</span><strong>Their Offer</strong><b id="theirTotal">0</b></div>
+          <div class="trade-search-wrap">
+            <span>⌕</span>
+            <input id="theirSearch" type="search" placeholder="Search an item...">
+          </div>
+          <div id="theirResults" class="trade-results"></div>
+          <div id="theirItems" class="selected-items"></div>
+        </div>
+      </div>
+
+      <div id="tradeResult" class="trade-result neutral">
+        <div class="result-title">ADD ITEMS TO COMPARE</div>
+        <div class="result-diff">Your trade will appear here</div>
+      </div>
+    </section>
+
     <div id="items" class="grid"></div>
     <div id="empty" class="empty hidden">No items found.</div>
   </main>
 
   <footer>Trading Value List • Values are based on the supplied list.</footer>
+  <link rel="stylesheet" href="trade-calculator.css">
   <script src="script.js"></script>
+  <script src="trade-calculator.js"></script>
 </body>
 </html>
