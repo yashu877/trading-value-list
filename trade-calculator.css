@@ -69,3 +69,64 @@
   .trade-vs { padding:2px 0; }
   .trade-vs::before, .trade-vs::after { content:""; height:1px; flex:1; margin:0 10px; background:rgba(255,255,255,.1); }
 }
+
+
+/* Chroma item badge — only the word CHROMA gets the animated rainbow effect. */
+.trade-chroma-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 7px;
+  padding: 4px 7px;
+  border-radius: 7px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .35px;
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #feca57,
+    #48dbfb,
+    #5f27cd,
+    #ff6b6b
+  );
+  background-size: 250% 100%;
+  box-shadow: 0 0 8px rgba(255, 107, 107, .18);
+  animation: tradeChromaMove 3s linear infinite;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  flex: 0 0 auto;
+}
+
+.trade-item-name {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.trade-item-rest {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes tradeChromaMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.result-item .trade-item-name {
+  flex: 1;
+}
+
+.selected-item .trade-item-name {
+  flex: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trade-chroma-tag { animation: none; }
+}

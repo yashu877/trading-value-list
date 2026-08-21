@@ -5,6 +5,12 @@
 
   const money2 = n => n.toLocaleString("en-US");
 
+  function formatTradeName(name) {
+    const safe = escapeHtml(name);
+    if (!name.toLowerCase().startsWith("chroma ")) return safe;
+    return `<span class="trade-chroma-tag">CHROMA</span><span class="trade-item-rest">${escapeHtml(name.slice(7))}</span>`;
+  }
+
   function setupSide(side, searchId, resultsId, itemsId, totalId) {
     const searchEl = document.getElementById(searchId);
     const resultsEl = document.getElementById(resultsId);
@@ -23,7 +29,7 @@
       resultsEl.innerHTML = matches.length
         ? matches.map(([name, value, demand]) => `
           <button type="button" class="result-item" data-name="${escapeHtml(name)}">
-            <span>${escapeHtml(name)}</span>
+            <span class="trade-item-name">${formatTradeName(name)}</span>
             <b>${money2(value)}</b>
           </button>`).join("")
         : '<div class="no-results">No matching items</div>';
@@ -45,7 +51,7 @@
     function renderSelected() {
       itemsEl.innerHTML = side.map(([name, value], i) => `
         <div class="selected-item">
-          <span>${escapeHtml(name)}</span>
+          <span class="trade-item-name">${formatTradeName(name)}</span>
           <b>${money2(value)}</b>
           <button type="button" aria-label="Remove ${escapeHtml(name)}" data-index="${i}">×</button>
         </div>`).join("");
