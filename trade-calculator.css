@@ -203,3 +203,79 @@
   .reset-trade{padding:9px 11px;font-size:11px}
   .trade-side{padding:13px}
 }
+
+
+/* ===== Dedicated Trade Center visual layer ===== */
+#tradeCalculator{
+  scroll-margin-top:24px;
+}
+#tradeCalculator::before{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  top:-90px;
+  left:8%;
+  border-radius:50%;
+  background:rgba(140,124,255,.10);
+  filter:blur(80px);
+  pointer-events:none;
+}
+#tradeCalculator::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:4%;
+  bottom:-100px;
+  border-radius:50%;
+  background:rgba(72,219,251,.07);
+  filter:blur(80px);
+  pointer-events:none;
+}
+#tradeCalculator .trade-head-copy{
+  position:relative;
+  z-index:1;
+}
+#tradeCalculator .trade-head{
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+#tradeCalculator .trade-head h2{
+  font-size:clamp(30px,5vw,42px);
+  letter-spacing:-1.5px;
+}
+#tradeCalculator .trade-head p{
+  max-width:520px;
+  line-height:1.55;
+}
+#tradeCalculator .trade-sides{
+  margin-top:4px;
+}
+#tradeCalculator .trade-side{
+  position:relative;
+}
+#tradeCalculator .trade-side:first-child{
+  box-shadow:inset 0 1px 0 rgba(140,124,255,.07);
+}
+#tradeCalculator .trade-side:last-child{
+  box-shadow:inset 0 1px 0 rgba(72,219,251,.06);
+}
+#tradeCalculator .trade-result{
+  margin-top:20px;
+  min-height:78px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+#tradeCalculator .trade-vs{
+  align-self:center;
+}
+@media(max-width:720px){
+  #tradeCalculator .trade-head{
+    padding-bottom:14px;
+  }
+  #tradeCalculator .trade-result{
+    min-height:72px;
+  }
+}

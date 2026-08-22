@@ -100,3 +100,45 @@ footer div{display:flex;gap:8px}footer strong{color:#a1a8b9}footer a:hover{color
 }
 @media(max-width:380px){.grid{grid-template-columns:1fr}.hero h1{font-size:52px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+
+/* ===== Dedicated Trade Center section ===== */
+.trade-section-divider{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:72px 0 22px;
+}
+.trade-section-divider > span{
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,rgba(140,124,255,.28),transparent);
+}
+.trade-divider-label{
+  flex:0 0 auto;
+  padding:7px 11px;
+  border:1px solid rgba(140,124,255,.20);
+  border-radius:999px;
+  color:#9e95e9;
+  background:rgba(140,124,255,.06);
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:1.8px;
+}
+.hero-btn:not(.primary){
+  position:relative;
+  overflow:hidden;
+}
+.hero-btn:not(.primary)::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.08) 50%,transparent 80%);
+  transform:translateX(-120%);
+  transition:transform .5s ease;
+}
+.hero-btn:not(.primary):hover::after{transform:translateX(120%)}
+
+@media(max-width:620px){
+  .trade-section-divider{margin:55px 0 18px}
+}
