@@ -7,14 +7,24 @@ const empty = document.getElementById("empty");
 const itemCount = document.getElementById("itemCount");
 const totalValue = document.getElementById("totalValue");
 const avgDemand = document.getElementById("avgDemand");
+const resultChip = document.getElementById("resultChip");
+const heroTopValue = document.getElementById("heroTopValue");
 
 const money = n => n.toLocaleString("en-US");
 
-function render(){
+function demandMeta(demand) {
+  if (demand >= 9) return { cls: "hot", label: "Very High", icon: "🔥" };
+  if (demand >= 7) return { cls: "high", label: "High", icon: "★" };
+  if (demand >= 5) return { cls: "mid", label: "Medium", icon: "◆" };
+  if (demand >= 3) return { cls: "low", label: "Low", icon: "•" };
+  return { cls: "very-low", label: "Very Low", icon: "↓" };
+}
+
+function render() {
   const q = search.value.trim().toLowerCase();
   let list = ITEMS.filter(x => x[0].toLowerCase().includes(q));
 
-  switch(sort.value){
+  switch(sort.value) {
     case "value-asc": list.sort((a,b)=>a[1]-b[1]); break;
     case "demand-desc": list.sort((a,b)=>b[2]-a[2] || b[1]-a[1]); break;
     case "demand-asc": list.sort((a,b)=>a[2]-b[2] || a[1]-b[1]); break;
@@ -22,30 +32,60 @@ function render(){
     default: list.sort((a,b)=>b[1]-a[1]);
   }
 
-  container.innerHTML = list.map(([name,value,demand])=>{
+  container.innerHTML = list.map(([name,value,demand], index) => {
     const chroma = name.toLowerCase().startsWith("chroma");
-    const demandClass = demand >= 9 ? "🔥" : demand >= 7 ? "★" : "•";
-    return `<article class="card">
+    const meta = demandMeta(demand);
+    return `<article class="card" style="--delay:${Math.min(index,12)*25}ms">
+      <div class="card-shine"></div>
       <div class="top">
-        <div class="name">${escapeHtml(name)}</div>
+        <div class="name" title="${escapeHtml(name)}">${escapeHtml(name)}</div>
         ${chroma ? '<span class="tag">CHROMA</span>' : ''}
       </div>
-      <div class="value">${money(value)}</div>
-      <div class="label">Value</div>
-      <div class="demand-row"><span class="demand">${demandClass} ${demand}/10</span><span class="label">Demand</span></div>
-      <div class="bar"><i style="width:${demand*10}%"></i></div>
+      <div class="value-row">
+        <div>
+          <div class="value">${money(value)}</div>
+          <div class="label">VALUE</div>
+        </div>
+        <div class="mini-rank">#${index + 1}</div>
+      </div>
+      <div class="demand-row">
+        <span class="demand ${meta.cls}">${meta.icon} ${demand}/10</span>
+        <span class="demand-label">${meta.label}</span>
+      </div>
+      <div class="bar ${meta.cls}" aria-label="Demand ${demand} out of 10"><i style="width:${demand*10}%"></i></div>
     </article>`;
   }).join("");
 
-  empty.classList.toggle("hidden", list.length !== 0);
-  itemCount.textContent = list.length.toLocaleString();
-  totalValue.textContent = money(list.reduce((s,x)=>s+x[1],0));
-  avgDemand.textContent = list.length ? (list.reduce((s,x)=>s+x[2],0)/list.length).toFixed(1)+"/10" : "0/10";
+  const count = list.length;
+  const total = list.reduce((s,x)=>s+x[1],0);
+  const avg = count ? list.reduce((s,x)=>s+x[2],0)/count : 0;
+
+  empty.classList.toggle("hidden", count !== 0);
+  itemCount.textContent = count.toLocaleString();
+  totalValue.textContent = money(total);
+  avgDemand.textContent = count ? avg.toFixed(1)+"/10" : "0/10";
+  resultChip.textContent = `${count.toLocaleString()} ${count === 1 ? "result" : "results"}`;
+
+  if (ITEMS.length) heroTopValue.textContent = money(Math.max(...ITEMS.map(x=>x[1])));
 }
 
-function escapeHtml(str){
+function escapeHtml(str) {
   return str.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 }
-search.addEventListener("input",render);
-sort.addEventListener("change",render);
+
+search.addEventListener("input", render);
+sort.addEventListener("change", render);
+
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement !== search && !["INPUT","SELECT","TEXTAREA"].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    search.focus();
+  }
+  if (e.key === "Escape" && document.activeElement === search) {
+    search.value = "";
+    render();
+    search.blur();
+  }
+});
+
 render();

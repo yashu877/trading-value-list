@@ -192,3 +192,14 @@
 @keyframes tradeGradient{0%{background-position:0% 50%}100%{background-position:250% 50%}}
 @keyframes resultShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @media (prefers-reduced-motion:reduce){.trade-head h2 span,.trade-result::after{animation:none}}
+
+/* ===== Upgraded calculator finishing touches ===== */
+.trade-calculator{scroll-margin-top:20px}
+.trade-calculator .eyebrow{color:#9ca3ba}
+.trade-result.neutral{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.08)}
+.trade-result .result-title{letter-spacing:.8px}
+@media(max-width:620px){
+  .trade-head{gap:10px}
+  .reset-trade{padding:9px 11px;font-size:11px}
+  .trade-side{padding:13px}
+}

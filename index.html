@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d14">
+  <meta name="description" content="Trading Value List — item values, demand and trade calculator.">
   <title>Trading Value List</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="trade-calculator.css">
 </head>
 <body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
   <header class="hero">
-    <div>
-      <div class="eyebrow">TRADING HUB</div>
-      <h1>Value <span>List</span></h1>
-      <p>Check item values and demand before making a trade.</p>
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="pulse"></span> TRADING HUB • LIVE VALUES</div>
+      <div class="hero-row">
+        <div>
+          <h1>Value <span>List</span></h1>
+          <p>Check item values, demand and trade fairness before you deal.</p>
+          <div class="hero-actions">
+            <a href="#items" class="hero-btn primary">Explore Values <span>↓</span></a>
+            <a href="#tradeCalculator" class="hero-btn">Trade Calculator <span>↗</span></a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top"><span>MARKET STATUS</span><b>● ONLINE</b></div>
+          <strong id="heroTopValue">100K+</strong>
+          <small>Top listed item value</small>
+        </div>
+      </div>
     </div>
-    <div class="hero-badge">LIVE LIST</div>
   </header>
 
   <main>
-    <section class="controls">
+    <section class="controls glass">
       <div class="search-wrap">
         <span>⌕</span>
-        <input id="search" type="search" placeholder="Search an item...">
+        <input id="search" type="search" autocomplete="off" placeholder="Search an item..." aria-label="Search items">
+        <kbd>/</kbd>
       </div>
-      <select id="sort">
+      <select id="sort" aria-label="Sort items">
         <option value="value-desc">Highest Value</option>
         <option value="value-asc">Lowest Value</option>
         <option value="demand-desc">Highest Demand</option>
@@ -32,11 +51,27 @@
     </section>
 
     <section class="stats">
-      <div><b id="itemCount">0</b><small>Items</small></div>
-      <div><b id="totalValue">0</b><small>Total listed value</small></div>
-      <div><b id="avgDemand">0</b><small>Average demand</small></div>
+      <div class="stat-card">
+        <span class="stat-icon">◈</span>
+        <div><b id="itemCount">0</b><small>Items shown</small></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon gold">◆</span>
+        <div><b id="totalValue">0</b><small>Total listed value</small></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon blue">★</span>
+        <div><b id="avgDemand">0</b><small>Average demand</small></div>
+      </div>
     </section>
 
+    <section class="section-heading">
+      <div>
+        <div class="eyebrow">MARKET CATALOG</div>
+        <h2>Browse <span>Items</span></h2>
+      </div>
+      <div class="result-chip" id="resultChip">0 results</div>
+    </section>
 
     <section class="trade-calculator" id="tradeCalculator">
       <div class="trade-head">
@@ -53,7 +88,7 @@
           <div class="side-title"><span>🟦</span><strong>Your Offer</strong><b id="yourTotal">0</b></div>
           <div class="trade-search-wrap">
             <span>⌕</span>
-            <input id="yourSearch" type="search" placeholder="Search an item...">
+            <input id="yourSearch" type="search" autocomplete="off" placeholder="Search an item..." aria-label="Search your offer">
           </div>
           <div id="yourResults" class="trade-results"></div>
           <div id="yourItems" class="selected-items"></div>
@@ -65,7 +100,7 @@
           <div class="side-title"><span>🟪</span><strong>Their Offer</strong><b id="theirTotal">0</b></div>
           <div class="trade-search-wrap">
             <span>⌕</span>
-            <input id="theirSearch" type="search" placeholder="Search an item...">
+            <input id="theirSearch" type="search" autocomplete="off" placeholder="Search an item..." aria-label="Search their offer">
           </div>
           <div id="theirResults" class="trade-results"></div>
           <div id="theirItems" class="selected-items"></div>
@@ -78,12 +113,19 @@
       </div>
     </section>
 
-    <div id="items" class="grid"></div>
-    <div id="empty" class="empty hidden">No items found.</div>
+    <section id="items" class="grid" aria-live="polite"></section>
+    <div id="empty" class="empty hidden">
+      <div class="empty-icon">⌕</div>
+      <strong>No items found</strong>
+      <span>Try a different name or clear your search.</span>
+    </div>
   </main>
 
-  <footer>Trading Value List • Values are based on the supplied list.</footer>
-  <link rel="stylesheet" href="trade-calculator.css">
+  <footer>
+    <div><strong>Trading Value List</strong><span>•</span><span>Values are based on the supplied list.</span></div>
+    <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
+  </footer>
+
   <script src="script.js"></script>
   <script src="trade-calculator.js"></script>
 </body>
